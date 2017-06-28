@@ -42,37 +42,25 @@ function calculateSalesTax(salesData, taxRates) {
   var tstx = {};
 
 for (let company of salesData) {
+
   var totalSales = findTotal(company.sales);
    company['totalSales'] = totalSales;
+
   var taxRate = taxRates[company.province];
-    var totalTax = getTotalTax(taxRate, totalSales);
+
+  var totalTax = getTotalTax(taxRate, totalSales);
     company['totalTax'] = totalTax;
 
   if(!tstx[company.name]){
-   tstx[company.name] = {"totalSales" : totalSales,
-                          "totalTax"  : totalTax};
-    }else {
+   tstx[company.name] = {"totalSales" : totalSales, "totalTax"  : totalTax};
+    } else {
       tstx[company.name].totalSales = tstx[company.name].totalSales + totalSales;
       tstx[company.name].totalTax = tstx[company.name].totalTax + totalTax;
-
-
     }
-
-
   }
-    console.log(tstx);
-
+  console.log(tstx);
 }
 
-// for (let company of salesData) {
-// if(!tstx[company.name]){
-//  tstx[company.name] = {totalSales : company.t
-//   , company.totalTax}
-//  console.log(tstx);
-// }
-//   tstx[company.name] =  {company.totalSales, company.totalTax};
-//   }
-// }
 
 calculateSalesTax(companySalesData, salesTaxRates);
 
